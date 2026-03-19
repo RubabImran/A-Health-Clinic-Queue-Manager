@@ -2,15 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Queue • Health Clinic Queue</title>
+    <title>Queue • HealthQueue</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
       body {
         font-family: "Roboto", sans-serif;
-        background: #f5f7fa;
+        background: linear-gradient(135deg, #f0f4ff, #e3f2fd);
         margin: 0;
         color: #333;
+        animation: fadeIn 0.8s ease;
       }
+
+      /* === Navbar (Exactly same as Home page) === */
       .navbar {
         background: #1976d2;
         color: white;
@@ -18,103 +22,223 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+        position: sticky;
+        top: 0;
+        z-index: 100;
       }
+      .logo {
+        font-size: 28px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
       .container {
-        max-width: 1000px;
-        margin: 30px auto;
+        max-width: 1100px;
+        margin: 40px auto;
         padding: 20px;
       }
-      .card {
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-        padding: 25px;
+
+      h1 {
+        font-size: 36px;
+        color: #1565c0;
+        margin-bottom: 8px;
+        animation: slideDown 0.8s ease;
       }
-      button {
-        padding: 12px 25px;
-        margin: 5px;
-        border: none;
-        border-radius: 6px;
-        font-size: 16px;
+
+      .stats {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
       }
-      .btn-blue {
+      .stat-badge {
         background: #1976d2;
         color: white;
+        padding: 8px 18px;
+        border-radius: 30px;
+        font-weight: 500;
+        box-shadow: 0 3px 8px rgba(25, 118, 210, 0.3);
+      }
+
+      .card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(25, 118, 210, 0.2);
+        padding: 30px;
+        transition: all 0.4s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 45px rgba(25, 118, 210, 0.35);
+      }
+
+      .queue-list {
+        background: #e3f2fd;
+        padding: 20px;
+        border-radius: 12px;
+        min-height: 260px;
+        max-height: 420px;
+        overflow-y: auto;
+      }
+
+      .patient-item {
+        padding: 12px 15px;
+        margin: 8px 0;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        font-size: 17px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: 0.3s;
+      }
+      .patient-item:hover {
+        background: #bbdefb;
+        transform: translateX(8px);
+      }
+
+      button {
+        padding: 14px 28px;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        border-radius: 50px;
+        margin: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+      }
+      button:hover {
+        transform: scale(1.08) translateY(-2px);
       }
       .btn-red {
-        background: #f44336;
+        background: linear-gradient(90deg, #f44336, #e53935);
         color: white;
       }
       .btn-orange {
-        background: #ff9800;
+        background: linear-gradient(90deg, #ff9800, #fb8c00);
         color: white;
       }
-      .queue-list {
-        background: #e3f2fd;
-        padding: 15px;
-        border-radius: 8px;
-        min-height: 200px;
+      .btn-gray {
+        background: #757575;
+        color: white;
+      }
+      .btn-blue {
+        background: linear-gradient(90deg, #1976d2, #42a5f5);
+        color: white;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes slideDown {
+        from {
+          transform: translateY(-25px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
       }
     </style>
   </head>
   <body>
+    <!-- Navbar - Exactly same as your Home page -->
     <div class="navbar">
-      <h3>Health Clinic Queue</h3>
-      <div> 
-        <a href="/" style="color: white; margin: 0 15px; text-decoration: none"
+      <div class="logo">🏥 HealthQueue</div>
+      <div>
+        <a
+          href="/"
+          style="
+            color: white;
+            margin: 0 18px;
+            text-decoration: none;
+            font-weight: 500;
+          "
           >Home</a
         >
         <a
           href="/queue"
-          style="color: white; margin: 0 15px; text-decoration: none"
+          style="
+            color: white;
+            margin: 0 18px;
+            text-decoration: none;
+            font-weight: 500;
+          "
           >Queue</a
         >
         <a
           href="/register"
-          style="color: white; margin: 0 15px; text-decoration: none"
+          style="
+            color: white;
+            margin: 0 18px;
+            text-decoration: none;
+            font-weight: 500;
+          "
           >Register</a
         >
       </div>
     </div>
 
     <div class="container">
-      <h1>📋 Live Waiting Queue (FIFO) • {{ today_date }}</h1>
-      <p>
-        Seen today: <strong>{{ total_seen }}</strong> | Total Patients:
-        <strong>{{ total_registered }}</strong> | Last served: {{ last_served }}
+      <h1>📋 Live Waiting Queue (FIFO)</h1>
+      <p style="font-size: 18px; color: #555">
+        {{ today_date }} • Real-time Clinic Dashboard
       </p>
 
+      <div class="stats">
+        <span class="stat-badge"
+          >Seen Today: <strong>{{ total_seen }}</strong></span
+        >
+        <span class="stat-badge"
+          >Total Patients: <strong>{{ total_registered }}</strong></span
+        >
+        <span class="stat-badge"
+          >Last Served: <strong>{{ last_served }}</strong></span
+        >
+      </div>
+
       <div class="card">
-        <h2>Current Waiting List</h2>
+        <h2>⏳ Current Waiting List</h2>
         <div class="queue-list">
-          {% if queue %}
-          <ol>
-            {% for p in queue %}
-            <li style="font-size: 18px; margin: 8px 0">{{ p }}</li>
-            {% endfor %}
-          </ol>
-          {% else %}
-          <p style="color: #666; text-align: center">
-            🎉 Queue is empty • All patients served!
+          {% if queue %} {% for p in queue %}
+          <div class="patient-item">👤 &nbsp; {{ p }}</div>
+          {% endfor %} {% else %}
+          <p
+            style="
+              color: #666;
+              text-align: center;
+              padding: 40px 0;
+              font-size: 18px;
+            "
+          >
+            🎉 Queue is completely empty!<br />
+            All patients have been served today.
           </p>
           {% endif %}
         </div>
 
-        <div style="margin-top: 25px; text-align: center">
+        <div style="margin-top: 30px; text-align: center">
           <a href="/serve"
             ><button class="btn-red">👨‍⚕️ Serve Next Patient</button></a
           >
           <a href="/undo"
-            ><button class="btn-orange">↩️ Undo Last Serve</button></a
+            ><button class="btn-orange">↩️ Undo Last Serve (Stack)</button></a
           >
-          <a href="/reset"
-            ><button style="background: #757575; color: white">
-              Reset Queue
-            </button></a
-          >
+          <a href="/reset"><button class="btn-gray">🗑️ Reset Queue</button></a>
           <a href="/register"
-            ><button class="btn-blue">➕ Register More Patients</button></a
+            ><button class="btn-blue">➕ Register New Patient</button></a
           >
         </div>
       </div>
