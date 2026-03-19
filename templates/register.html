@@ -2,88 +2,217 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Register • Health Clinic Queue</title>
+    <title>Register • HealthQueue</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         font-family: "Roboto", sans-serif;
-        background: #f5f7fa;
+        background: linear-gradient(135deg, #f0f4ff, #e3f2fd);
         margin: 0;
         color: #333;
+        animation: fadeIn 0.8s ease;
       }
-     .navbar {
+
+      /* Navbar - Exactly same as Home & Queue */
+      .navbar {
         background: #1976d2;
         color: white;
         padding: 16px 30px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+        position: sticky;
+        top: 0;
+        z-index: 100;
       }
+      .logo {
+        font-size: 28px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
       .form-card {
-        max-width: 600px;
-        margin: 50px auto;
+        max-width: 520px;
+        margin: 60px auto;
         background: white;
-        padding: 40px;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        padding: 45px 40px;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(25, 118, 210, 0.25);
+        transition: all 0.4s ease;
       }
+
+      .form-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 25px 55px rgba(25, 118, 210, 0.35);
+      }
+
+      h1 {
+        text-align: center;
+        color: #1565c0;
+        font-size: 32px;
+        margin-bottom: 30px;
+        animation: slideDown 0.8s ease;
+      }
+
+      .input-group {
+        position: relative;
+        margin-bottom: 25px;
+      }
+
       input {
         width: 100%;
-        padding: 14px;
-        margin: 12px 0;
-        border: 1px solid #ccc;
-        border-radius: 6px;
+        padding: 16px 16px 16px 50px;
         font-size: 17px;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        transition: all 0.3s;
       }
+
+      input:focus {
+        border-color: #1976d2;
+        box-shadow: 0 0 0 4px rgba(25, 118, 210, 0.2);
+        outline: none;
+      }
+
+      .input-icon {
+        position: absolute;
+        left: 18px;
+        top: 11px;
+        font-size: 22px;
+        color: #1976d2;
+      }
+
       button {
         width: 100%;
-        padding: 16px;
-        background: #1976d2;
+        padding: 18px;
+        font-size: 19px;
+        font-weight: 600;
+        background: linear-gradient(90deg, #1976d2, #42a5f5);
         color: white;
-        font-size: 18px;
         border: none;
-        border-radius: 8px;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(25, 118, 210, 0.4);
+        transition: all 0.3s;
+      }
+
+      button:hover {
+        background: linear-gradient(90deg, #1565c0, #1976d2);
+        transform: scale(1.05) translateY(-3px);
+        box-shadow: 0 12px 28px rgba(25, 118, 210, 0.5);
+      }
+
+      .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 25px;
+        color: #1976d2;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .back-link:hover {
+        text-decoration: underline;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes slideDown {
+        from {
+          transform: translateY(-30px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
       }
     </style>
   </head>
   <body>
+    <!-- Navbar - Exactly same as Home & Queue -->
     <div class="navbar">
-      <h3>Health Clinic Queue</h3>
-      <div> 
-        <a href="/" style="color: white; margin: 0 15px; text-decoration: none"
+      <div class="logo">🏥 HealthQueue</div>
+      <div>
+        <a
+          href="/"
+          style="
+            color: white;
+            margin: 0 18px;
+            text-decoration: none;
+            font-weight: 500;
+          "
           >Home</a
         >
         <a
           href="/queue"
-          style="color: white; margin: 0 15px; text-decoration: none"
+          style="
+            color: white;
+            margin: 0 18px;
+            text-decoration: none;
+            font-weight: 500;
+          "
           >Queue</a
         >
         <a
           href="/register"
-          style="color: white; margin: 0 15px; text-decoration: none"
+          style="
+            color: white;
+            margin: 0 18px;
+            text-decoration: none;
+            font-weight: 500;
+          "
           >Register</a
         >
       </div>
     </div>
 
     <div class="form-card">
-      <h1 style="text-align: center; color: #1976d2">Register New Patient</h1>
+      <h1>➕ Register New Patient</h1>
+
       <form method="POST">
-        <input type="text" name="name" placeholder="Full Name" required />
-        <input type="number" name="age" placeholder="Age" required />
-        <input
-          type="text"
-          name="symptoms"
-          placeholder="Symptoms (comma separated)"
-          required
-        />
-        <button type="submit">✅ Add Patient to Queue</button>
+        <div class="input-group">
+          <span class="input-icon">👤</span>
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name (e.g. Fatima Yusuf)"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <span class="input-icon">📅</span>
+          <input type="number" name="age" placeholder="Age" required />
+        </div>
+
+        <div class="input-group">
+          <span class="input-icon">🩺</span>
+          <input
+            type="text"
+            name="symptoms"
+            placeholder="Symptoms (e.g. Fever, Cough, Headache)"
+            required
+          />
+        </div>
+
+        <button type="submit">✅ Add Patient & Join Queue</button>
       </form>
-      <br />
-      <a href="/queue" style="display: block; text-align: center"
-        >← Back to Queue</a
-      >
+
+      <a href="/queue" class="back-link">← Back to Live Queue</a>
     </div>
   </body>
 </html>
