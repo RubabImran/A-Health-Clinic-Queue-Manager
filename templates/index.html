@@ -1,23 +1,21 @@
-{% extends "base.html" %}
-{% block content %}
-    <h1>Clinic Waiting List</h1>
-    <p>Total patients seen today: <strong>{{ total_seen }}</strong></p>
-
-    <h2>Currently waiting</h2>
-    {% if waiting %}
-        <ul>
-        {% for patient in waiting %}
-            <li>
-                {{ patient.name }} – registered at 
-                {{ patient.registration_time.strftime('%H:%M on %d-%m-%Y') }}
-            </li>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Health Clinic Queue</title>
+    <style>body{font-family: Arial; padding: 20px;}</style>
+</head>
+<body>
+    <h1>🏥 Health Clinic - Queue Manager</h1>
+    <p><strong>Today:</strong> {{ today_date }} | Patients seen today: <b>{{ total_seen }}</b></p>
+    
+    <h2>⏳ Current Waiting List (FIFO)</h2>
+    <ol>
+        {% for patient in queue %}
+            <li>{{ patient }}</li>
         {% endfor %}
-        </ul>
-    {% else %}
-        <p>No patients waiting.</p>
-    {% endif %}
-
-    <form action="{{ url_for('see_next') }}" method="post">
-        <button type="submit">See Next Patient</button>
-    </form>
-{% endblock %}
+    </ol>
+    
+    <hr>
+    <a href="/register"><button style="padding:10px 20px; font-size:18px;">➕ Register New Patient</button></a>
+</body>
+</html>
