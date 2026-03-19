@@ -2,15 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Health Clinic Queue • Patient Management</title>
+    <title>HealthQueue • Smart Clinic Management</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
       body {
         font-family: "Roboto", sans-serif;
-        background: #f5f7fa;
+        background: linear-gradient(135deg, #f0f4ff, #e3f2fd);
         margin: 0;
         color: #333;
+        animation: fadeIn 1s ease-in-out;
       }
+
       .navbar {
         background: #1976d2;
         color: white;
@@ -18,109 +21,214 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+        position: sticky;
+        top: 0;
+        z-index: 100;
       }
+
+      .logo {
+        font-size: 28px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
       .container {
         max-width: 1100px;
-        margin: 40px auto;
+        margin: 60px auto;
         padding: 20px;
       }
+
       h1 {
-        font-size: 42px;
-        color: #1976d2;
+        font-size: 48px;
+        color: #1565c0;
         text-align: center;
+        margin-bottom: 10px;
+        animation: slideDown 0.8s ease;
       }
+
       .desc {
         text-align: center;
-        font-size: 20px;
+        font-size: 21px;
         color: #555;
-        max-width: 700px;
-        margin: 0 auto 40px;
+        max-width: 720px;
+        margin: 0 auto 50px;
+        line-height: 1.6;
       }
+
       .cards {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 30px;
+        gap: 35px;
       }
+
       .card {
         background: white;
-        border-radius: 16px;
-        box-shadow: 0 8px 25px rgba(25, 118, 210, 0.2);
-        padding: 40px 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(25, 118, 210, 0.2);
+        padding: 45px 35px;
         text-align: center;
-        transition: 0.3s;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
       }
+
       .card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 35px rgba(25, 118, 210, 0.3);
+        box-shadow: 0 20px 45px rgba(25, 118, 210, 0.35);
       }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.3) 0%,
+          transparent 70%
+        );
+        opacity: 0;
+        transition: 0.5s;
+        pointer-events: none;
+      }
+
+      .card:hover::before {
+        opacity: 1;
+        top: -30%;
+        left: -30%;
+      }
+
       .card h2 {
         color: #1976d2;
-        font-size: 28px;
+        font-size: 29px;
+        margin: 15px 0;
       }
+
+      .icon {
+        font-size: 68px;
+        margin-bottom: 15px;
+        transition: transform 0.4s;
+      }
+
       button {
-        padding: 16px 40px;
+        padding: 16px 45px;
         font-size: 18px;
+        font-weight: 600;
         border: none;
-        border-radius: 8px;
-        background: #1976d2;
+        border-radius: 50px;
+        background: linear-gradient(90deg, #1976d2, #42a5f5);
         color: white;
-        font-weight: 500;
         cursor: pointer;
+        box-shadow: 0 6px 15px rgba(25, 118, 210, 0.4);
+        transition: all 0.3s;
       }
+
       button:hover {
-        background: #1565c0;
-        transform: scale(1.05);
+        background: linear-gradient(90deg, #1565c0, #1976d2);
+        transform: scale(1.08);
+        box-shadow: 0 10px 25px rgba(25, 118, 210, 0.5);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-30px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .badge {
+        text-align: center;
+        margin-top: 50px;
+        font-size: 14px;
+        color: #666;
       }
     </style>
   </head>
   <body>
     <div class="navbar">
-      <h3>Health Clinic Queue</h3>
-      <div> 
-        <a href="/" style="color: white; margin: 0 15px; text-decoration: none"
+      <div class="logo">🏥 HealthQueue</div>
+      <div>
+        <a
+          href="/"
+          style="
+            color: white;
+            margin: 0 18px;
+            text-decoration: none;
+            font-weight: 500;
+          "
           >Home</a
         >
         <a
           href="/queue"
-          style="color: white; margin: 0 15px; text-decoration: none"
+          style="
+            color: white;
+            margin: 0 18px;
+            text-decoration: none;
+            font-weight: 500;
+          "
           >Queue</a
         >
         <a
           href="/register"
-          style="color: white; margin: 0 15px; text-decoration: none"
+          style="
+            color: white;
+            margin: 0 18px;
+            text-decoration: none;
+            font-weight: 500;
+          "
           >Register</a
         >
       </div>
     </div>
 
     <div class="container">
-      <h1>Welcome to Health Clinic Queue 👋</h1>
+      <h1>Welcome to HealthQueue 👋</h1>
       <p class="desc">
-        The modern clinic management platform that helps you register patients
-        instantly,<br />
-        manage waiting queues efficiently, and serve patients faster.
+        The smart, fast and modern clinic management platform.<br />
+        Register patients in seconds • Manage FIFO queues • Serve faster • Track
+        everything live.
       </p>
 
       <div class="cards">
         <!-- Card 1 -->
         <div class="card">
-          <h2>📋 Live Queue Management</h2>
-          <p style="font-size: 17px; margin: 20px 0">
-            View waiting patients (FIFO), serve next patient, undo mistakes, and
-            track today's progress.
+          <div class="icon">📋</div>
+          <h2>Live Queue Management</h2>
+          <p style="font-size: 17px; line-height: 1.6">
+            See waiting patients in order, serve next patient instantly,<br />
+            undo mistakes, and monitor daily performance.
           </p>
-          <a href="/queue"><button>Go to Queue Dashboard →</button></a>
+          <br />
+          <a href="/queue"><button>🚀 Open Queue Dashboard</button></a>
         </div>
 
         <!-- Card 2 -->
         <div class="card">
-          <h2>➕ Register New Patient</h2>
-          <p style="font-size: 17px; margin: 20px 0">
-            Quickly add patients with name, age & symptoms. They join the queue
-            instantly.
+          <div class="icon">➕</div>
+          <h2>Register New Patient</h2>
+          <p style="font-size: 17px; line-height: 1.6">
+            Add patient details quickly and automatically<br />
+            place them at the end of the waiting queue.
           </p>
-          <a href="/register"><button>Start Registration →</button></a>
+          <br />
+          <a href="/register"><button>📝 Start Patient Registration</button></a>
         </div>
       </div>
     </div>
