@@ -2,20 +2,31 @@
 <html>
 <head>
     <title>Health Clinic Queue</title>
-    <style>body{font-family: Arial; padding: 20px;}</style>
+    <style>
+        body {font-family: Arial; padding: 20px; background: #f0f8ff;}
+        h1 {color: #d32f2f;}
+        button {padding: 12px 20px; font-size: 18px; margin: 5px;}
+    </style>
 </head>
 <body>
-    <h1>🏥 Health Clinic - Queue Manager</h1>
-    <p><strong>Today:</strong> {{ today_date }} | Patients seen today: <b>{{ total_seen }}</b></p>
-    
-    <h2>⏳ Current Waiting List (FIFO)</h2>
-    <ol>
-        {% for patient in queue %}
-            <li>{{ patient }}</li>
-        {% endfor %}
-    </ol>
-    
+    <h1>🏥 Health Clinic - Queue Manager (Assignment 4)</h1>
+    <p><strong>Date:</strong> {{ today_date }} | 
+       <b>Patients seen today: {{ total_seen }}</b></p>
+
+    <h2>⏳ Current Waiting List (First-In First-Out)</h2>
+    {% if queue %}
+        <ol>
+            {% for patient in queue %}
+                <li>{{ patient }}</li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <p>✅ No patients waiting! Clinic is empty.</p>
+    {% endif %}
+
     <hr>
-    <a href="/register"><button style="padding:10px 20px; font-size:18px;">➕ Register New Patient</button></a>
+    <a href="/register"><button style="background:#4caf50; color:white;">➕ Register New Patient</button></a>
+    <a href="/serve"><button style="background:#f44336; color:white;">👨‍⚕️ Serve Next Patient</button></a>
+    
 </body>
 </html>
