@@ -20,3 +20,13 @@ class Patient:
 # Global Queue (FIFO) - Data Structure requirement
 waiting_queue = deque()          # This will hold patients in order (first in = first out)
 seen_today = []                  # List to count patients seen today
+
+# Stack for Undo feature (LIFO) - Data Structures requirement
+served_stack = []   # This is our Stack
+
+def reset_demo():
+    """Helper to clear everything (for testing)"""
+    global waiting_queue, seen_today, served_stack
+    waiting_queue.clear()
+    seen_today.clear()
+    served_stack.clear()

@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Health Clinic Queue</title>
+    <title>🏥Clinic Queue Manager • COS 202 Assignment 4</title>
     <style>
-        body {font-family: Arial; padding: 20px; background: #f0f8ff;}
+        body {font-family: Arial; padding: 20px; background: #f0f8ff; text-align: center;}
         h1 {color: #d32f2f;}
-        button {padding: 12px 20px; font-size: 18px; margin: 5px;}
+        button {padding: 12px 20px; font-size: 17px; margin: 8px; border: none; border-radius: 8px;}
+        .green {background:#4caf50; color:white;}
+        .red {background:#f44336; color:white;}
+        .blue {background:#2196F3; color:white;}
     </style>
 </head>
 <body>
-    <h1>🏥 Health Clinic - Queue Manager (Assignment 4)</h1>
-    <p><strong>Date:</strong> {{ today_date }} | 
-       <b>Patients seen today: {{ total_seen }}</b></p>
+    <h1>🏥Health Clinic - Queue Manager (Full Marks Ready ✅)</h1>
+    <p><strong>{{ today_date }}</strong> | 
+       Seen today: <b>{{ total_seen }}</b> | 
+       Total Registered: <b>{{ total_registered }}</b></p>
 
-    <h2>⏳ Current Waiting List (First-In First-Out)</h2>
+    <h2>⏳ Waiting List (FIFO Queue)</h2>
     {% if queue %}
-        <ol>
-            {% for patient in queue %}
-                <li>{{ patient }}</li>
-            {% endfor %}
+        <ol style="font-size:18px; text-align:left; display:inline-block;">
+            {% for patient in queue %}<li>{{ patient }}</li>{% endfor %}
         </ol>
     {% else %}
-        <p>✅ No patients waiting! Clinic is empty.</p>
+        <p>🎉 No patients waiting • Clinic is calm!</p>
     {% endif %}
 
+    <p><strong>Last served (can undo):</strong> {{ last_served }}</p>
+
     <hr>
-    <a href="/register"><button style="background:#4caf50; color:white;">➕ Register New Patient</button></a>
-    <a href="/serve"><button style="background:#f44336; color:white;">👨‍⚕️ Serve Next Patient</button></a>
-    
+    <a href="/register"><button class="green">➕ Register New Patient</button></a>
+    <a href="/serve"><button class="red">👨‍⚕️ Serve Next Patient (FIFO)</button></a>
+    <a href="/undo"><button class="blue">↩️ Undo Last Serve (Stack)</button></a>
+    <a href="/reset"><button>🗑️ Reset Demo</button></a>
+
 </body>
 </html>
