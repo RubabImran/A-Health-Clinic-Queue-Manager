@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Clinic Waiting List</h1>
+    <p>Total patients seen today: <strong>{{ total_seen }}</strong></p>
+
+    <h2>Currently waiting</h2>
+    {% if waiting %}
+        <ul>
+        {% for patient in waiting %}
+            <li>
+                {{ patient.name }} – registered at 
+                {{ patient.registration_time.strftime('%H:%M on %d-%m-%Y') }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No patients waiting.</p>
+    {% endif %}
+
+    <form action="{{ url_for('see_next') }}" method="post">
+        <button type="submit">See Next Patient</button>
+    </form>
+{% endblock %}
