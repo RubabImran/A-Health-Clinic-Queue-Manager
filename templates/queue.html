@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Queue • Health Clinic Queue</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+      body {
+        font-family: "Roboto", sans-serif;
+        background: #f5f7fa;
+        margin: 0;
+        color: #333;
+      }
+      .navbar {
+        background: #1976d2;
+        color: white;
+        padding: 16px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .container {
+        max-width: 1000px;
+        margin: 30px auto;
+        padding: 20px;
+      }
+      .card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        padding: 25px;
+      }
+      button {
+        padding: 12px 25px;
+        margin: 5px;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+      }
+      .btn-blue {
+        background: #1976d2;
+        color: white;
+      }
+      .btn-red {
+        background: #f44336;
+        color: white;
+      }
+      .btn-orange {
+        background: #ff9800;
+        color: white;
+      }
+      .queue-list {
+        background: #e3f2fd;
+        padding: 15px;
+        border-radius: 8px;
+        min-height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <h3>Health Clinic Queue</h3>
+      <div> 
+        <a href="/" style="color: white; margin: 0 15px; text-decoration: none"
+          >Home</a
+        >
+        <a
+          href="/queue"
+          style="color: white; margin: 0 15px; text-decoration: none"
+          >Queue</a
+        >
+        <a
+          href="/register"
+          style="color: white; margin: 0 15px; text-decoration: none"
+          >Register</a
+        >
+      </div>
+    </div>
+
+    <div class="container">
+      <h1>📋 Live Waiting Queue (FIFO) • {{ today_date }}</h1>
+      <p>
+        Seen today: <strong>{{ total_seen }}</strong> | Total Patients:
+        <strong>{{ total_registered }}</strong> | Last served: {{ last_served }}
+      </p>
+
+      <div class="card">
+        <h2>Current Waiting List</h2>
+        <div class="queue-list">
+          {% if queue %}
+          <ol>
+            {% for p in queue %}
+            <li style="font-size: 18px; margin: 8px 0">{{ p }}</li>
+            {% endfor %}
+          </ol>
+          {% else %}
+          <p style="color: #666; text-align: center">
+            🎉 Queue is empty • All patients served!
+          </p>
+          {% endif %}
+        </div>
+
+        <div style="margin-top: 25px; text-align: center">
+          <a href="/serve"
+            ><button class="btn-red">👨‍⚕️ Serve Next Patient</button></a
+          >
+          <a href="/undo"
+            ><button class="btn-orange">↩️ Undo Last Serve (Stack)</button></a
+          >
+          <a href="/reset"
+            ><button style="background: #757575; color: white">
+              Reset Demo
+            </button></a
+          >
+          <a href="/register"
+            ><button class="btn-blue">➕ Register More Patients</button></a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

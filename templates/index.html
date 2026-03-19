@@ -1,38 +1,128 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>🏥Clinic Queue Manager • COS 202 Assignment 4</title>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Health Clinic Queue • Patient Management</title>
     <style>
-        body {font-family: Arial; padding: 20px; background: #f0f8ff; text-align: center;}
-        h1 {color: #d32f2f;}
-        button {padding: 12px 20px; font-size: 17px; margin: 8px; border: none; border-radius: 8px;}
-        .green {background:#4caf50; color:white;}
-        .red {background:#f44336; color:white;}
-        .blue {background:#2196F3; color:white;}
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+      body {
+        font-family: "Roboto", sans-serif;
+        background: #f5f7fa;
+        margin: 0;
+        color: #333;
+      }
+      .navbar {
+        background: #1976d2;
+        color: white;
+        padding: 16px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .container {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+      h1 {
+        font-size: 42px;
+        color: #1976d2;
+        text-align: center;
+      }
+      .desc {
+        text-align: center;
+        font-size: 20px;
+        color: #555;
+        max-width: 700px;
+        margin: 0 auto 40px;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+      .card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 8px 25px rgba(25, 118, 210, 0.2);
+        padding: 40px 30px;
+        text-align: center;
+        transition: 0.3s;
+      }
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(25, 118, 210, 0.3);
+      }
+      .card h2 {
+        color: #1976d2;
+        font-size: 28px;
+      }
+      button {
+        padding: 16px 40px;
+        font-size: 18px;
+        border: none;
+        border-radius: 8px;
+        background: #1976d2;
+        color: white;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #1565c0;
+        transform: scale(1.05);
+      }
     </style>
-</head>
-<body>
-    <h1>🏥Health Clinic - Queue Manager (Full Marks Ready ✅)</h1>
-    <p><strong>{{ today_date }}</strong> | 
-       Seen today: <b>{{ total_seen }}</b> | 
-       Total Registered: <b>{{ total_registered }}</b></p>
+  </head>
+  <body>
+    <div class="navbar">
+      <h3>Health Clinic Queue</h3>
+      <div> 
+        <a href="/" style="color: white; margin: 0 15px; text-decoration: none"
+          >Home</a
+        >
+        <a
+          href="/queue"
+          style="color: white; margin: 0 15px; text-decoration: none"
+          >Queue</a
+        >
+        <a
+          href="/register"
+          style="color: white; margin: 0 15px; text-decoration: none"
+          >Register</a
+        >
+      </div>
+    </div>
 
-    <h2>⏳ Waiting List (FIFO Queue)</h2>
-    {% if queue %}
-        <ol style="font-size:18px; text-align:left; display:inline-block;">
-            {% for patient in queue %}<li>{{ patient }}</li>{% endfor %}
-        </ol>
-    {% else %}
-        <p>🎉 No patients waiting • Clinic is calm!</p>
-    {% endif %}
+    <div class="container">
+      <h1>Welcome to Health Clinic Queue 👋</h1>
+      <p class="desc">
+        The modern clinic management platform that helps you register patients
+        instantly,<br />
+        manage waiting queues efficiently, and serve patients faster.
+      </p>
 
-    <p><strong>Last served (can undo):</strong> {{ last_served }}</p>
+      <div class="cards">
+        <!-- Card 1 -->
+        <div class="card">
+          <h2>📋 Live Queue Management</h2>
+          <p style="font-size: 17px; margin: 20px 0">
+            View waiting patients (FIFO), serve next patient, undo mistakes, and
+            track today's progress.
+          </p>
+          <a href="/queue"><button>Go to Queue Dashboard →</button></a>
+        </div>
 
-    <hr>
-    <a href="/register"><button class="green">➕ Register New Patient</button></a>
-    <a href="/serve"><button class="red">👨‍⚕️ Serve Next Patient</button></a>
-    <a href="/undo"><button class="blue">↩️ Undo Last Serve</button></a>
-    <a href="/reset"><button>🗑️ Reset Demo</button></a>
-
-</body>
+        <!-- Card 2 -->
+        <div class="card">
+          <h2>➕ Register New Patient</h2>
+          <p style="font-size: 17px; margin: 20px 0">
+            Quickly add patients with name, age & symptoms. They join the queue
+            instantly.
+          </p>
+          <a href="/register"><button>Start Registration →</button></a>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

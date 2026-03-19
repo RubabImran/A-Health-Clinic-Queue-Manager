@@ -4,22 +4,28 @@ from datetime import datetime
 
 app = Flask(__name__)
 
+# HOME PAGE - Professional landing
 @app.route('/')
 def home():
+    return render_template('index.html')
+
+# QUEUE PAGE
+@app.route('/queue')
+def queue():
     queue_list = [p.get_info() for p in waiting_queue]
     total_seen = len(seen_today)
-    total_registered = len(waiting_queue) + len(seen_today)
+    total_registered = len(waiting_queue) + total_seen
     today_date = datetime.now().strftime("%d %B %Y")
-    
     last_served = served_stack[-1].get_info() if served_stack else "None yet"
     
-    return render_template('index.html', 
-                           queue=queue_list, 
+    return render_template('queue.html',
+                           queue=queue_list,
                            total_seen=total_seen,
                            total_registered=total_registered,
                            today_date=today_date,
                            last_served=last_served)
 
+# REGISTER PAGE
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -29,32 +35,34 @@ def register():
         
         new_patient = Patient(name, age, symptoms)
         waiting_queue.append(new_patient)
-        return redirect(url_for('home'))
+        return redirect('/queue')   # After register → go to queue page
+    
     return render_template('register.html')
 
+# Actions
 @app.route('/serve')
 def serve():
     if waiting_queue:
-        next_patient = waiting_queue.popleft()
-        next_patient.seen = True
-        next_patient.arrival_time = datetime.now().strftime("%H:%M:%S")
-        seen_today.append(next_patient)
-        served_stack.append(next_patient)   # Push to Stack for undo
-    return redirect(url_for('home'))
+        p = waiting_queue.popleft()
+        p.seen = True
+        p.arrival_time = datetime.now().strftime("%H:%M:%S")
+        seen_today.append(p)
+        served_stack.append(p)
+    return redirect('/queue')
 
 @app.route('/undo')
 def undo():
     if served_stack:
-        last_patient = served_stack.pop()   # Pop from Stack (LIFO)
-        last_patient.seen = False
-        waiting_queue.appendleft(last_patient)  # Put back to front of queue
-        seen_today.remove(last_patient)
-    return redirect(url_for('home'))
+        p = served_stack.pop()
+        p.seen = False
+        waiting_queue.appendleft(p)
+        seen_today.remove(p)
+    return redirect('/queue')
 
 @app.route('/reset')
 def reset():
     reset_demo()
-    return redirect(url_for('home'))
+    return redirect('/queue')
 
 if __name__ == '__main__':
     app.run(debug=True)
