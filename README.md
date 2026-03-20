@@ -8,7 +8,7 @@
 
 ---
 
-## ✨ What is HealthQueue?
+##  What is HealthQueue?
 
 HealthQueue is a modern clinic queue management platform that allows:
 - **Registering new patients** instantly
@@ -21,7 +21,7 @@ Perfect real-world simulation for hospital/clinic reception.
 
 ---
 
-## 🎯 Features Implemented (All Assignment Requirements Fulfilled ✅)
+##  Features Implemented 
 
 - **OOP** → `Patient` class with `__init__` and `get_info()` method
 - **Data Structures** → `deque` (FIFO Queue) + List as **Stack** (Undo feature)
@@ -31,7 +31,7 @@ Perfect real-world simulation for hospital/clinic reception.
 
 ---
 
-## 🚀 How to Run Locally (Beginner Friendly)
+##  How to Run Locally 
 
 1. Download or clone the repository
 2. Open the folder in **VS Code**
@@ -48,7 +48,7 @@ Open your browser and go to:
 http://127.0.0.1:5000
 Enjoy! Register patients → Go to Queue → Serve & Undo.
 
-## 🛠 Technologies Used
+##  Technologies Used
 
 - Python + Flask
 - OOP (Classes)
